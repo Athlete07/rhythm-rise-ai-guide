@@ -122,6 +122,116 @@ const questions = [
       { value: 1, label: "Feeling motivated or inspired" },
     ],
   },
+  {
+    id: "q11",
+    text: "How do you prioritize your tasks?",
+    options: [
+      { value: 5, label: "By deadline and importance using a matrix" },
+      { value: 4, label: "I tackle the most difficult tasks first" },
+      { value: 3, label: "I start with quick wins to build momentum" },
+      { value: 2, label: "Based on my energy levels and mood" },
+      { value: 1, label: "I often work on what feels urgent in the moment" },
+    ],
+  },
+  {
+    id: "q12",
+    text: "How do you handle information consumption (reading, learning)?",
+    options: [
+      { value: 5, label: "Scheduled deep dives with notes and summaries" },
+      { value: 4, label: "Regular short bursts throughout the day" },
+      { value: 3, label: "Batched in dedicated sessions" },
+      { value: 2, label: "Continuously as information comes to me" },
+      { value: 1, label: "Mostly when I need specific information for a task" },
+    ],
+  },
+  {
+    id: "q13",
+    text: "How do you prefer to track your productivity?",
+    options: [
+      { value: 5, label: "Detailed metrics and analytics" },
+      { value: 4, label: "Regular reviews of completed tasks" },
+      { value: 3, label: "Reflection on output quality rather than quantity" },
+      { value: 2, label: "Feeling of accomplishment at the end of the day" },
+      { value: 1, label: "I rarely track productivity formally" },
+    ],
+  },
+  {
+    id: "q14",
+    text: "When do you do your most creative thinking?",
+    options: [
+      { value: 5, label: "During structured brainstorming sessions" },
+      { value: 4, label: "When relaxed and not focused on work" },
+      { value: 3, label: "Early in the morning before distractions" },
+      { value: 2, label: "Late at night when it's quiet" },
+      { value: 1, label: "Spontaneously throughout the day" },
+    ],
+  },
+  {
+    id: "q15",
+    text: "How do you handle unexpected interruptions?",
+    options: [
+      { value: 5, label: "I have systems in place to minimize them" },
+      { value: 4, label: "I batch them and address at specific times" },
+      { value: 3, label: "I'm flexible and can usually pivot easily" },
+      { value: 2, label: "They often derail my productivity completely" },
+      { value: 1, label: "I welcome them as breaks from focused work" },
+    ],
+  },
+  {
+    id: "q16",
+    text: "What helps you stay motivated long-term?",
+    options: [
+      { value: 5, label: "Clear goals with measurable milestones" },
+      { value: 4, label: "Connection to a bigger purpose or mission" },
+      { value: 3, label: "Variety and new challenges" },
+      { value: 2, label: "Recognition and external validation" },
+      { value: 1, label: "Immediate rewards and gratification" },
+    ],
+  },
+  {
+    id: "q17",
+    text: "How do you approach multitasking?",
+    options: [
+      { value: 5, label: "I avoid it completely - one task at a time" },
+      { value: 4, label: "I batch similar activities together" },
+      { value: 3, label: "I can effectively juggle multiple simple tasks" },
+      { value: 2, label: "I often have several complex projects active at once" },
+      { value: 1, label: "I prefer having multiple inputs at all times" },
+    ],
+  },
+  {
+    id: "q18",
+    text: "How would you describe your decision-making process?",
+    options: [
+      { value: 5, label: "Methodical and data-driven" },
+      { value: 4, label: "Balanced between analytical and intuitive" },
+      { value: 3, label: "Quick and decisive" },
+      { value: 2, label: "Collaborative and consensus-seeking" },
+      { value: 1, label: "Intuitive and gut-feeling based" },
+    ],
+  },
+  {
+    id: "q19",
+    text: "How do you handle repetitive or routine tasks?",
+    options: [
+      { value: 5, label: "I create systems or automate them" },
+      { value: 4, label: "I batch them into specific time blocks" },
+      { value: 3, label: "I delegate them when possible" },
+      { value: 2, label: "I mix them with more engaging tasks" },
+      { value: 1, label: "I often procrastinate on them" },
+    ],
+  },
+  {
+    id: "q20",
+    text: "What's your approach to maintaining work-life balance?",
+    options: [
+      { value: 5, label: "Strict boundaries with set work hours" },
+      { value: 4, label: "Regular disconnected time for rejuvenation" },
+      { value: 3, label: "Flexibility to work when inspired, rest when needed" },
+      { value: 2, label: "Integration of work and life in a fluid way" },
+      { value: 1, label: "I struggle with balance and often overwork" },
+    ],
+  },
 ];
 
 const QuizSection = ({ onComplete }: QuizSectionProps) => {

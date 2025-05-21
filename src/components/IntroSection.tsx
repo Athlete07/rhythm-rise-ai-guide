@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BadgeCheck, Brain, Clock, LineChart, Zap } from "lucide-react";
+import { BadgeCheck, Brain, Clock, LineChart, Zap, Users, Trophy } from "lucide-react";
 
 interface IntroSectionProps {
   onStart: () => void;
@@ -26,7 +26,7 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
               This science-backed assessment will help you understand:
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               <div className="flex items-start space-x-4">
                 <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
                   <Brain size={24} />
@@ -66,12 +66,32 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
                   <p className="text-gray-600">Tools and habits that match your style</p>
                 </div>
               </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+                  <Trophy size={24} />
+                </div>
+                <div>
+                  <h3 className="font-medium text-indigo-900">Strengths & Challenges</h3>
+                  <p className="text-gray-600">Maximize strengths and overcome challenges</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+                  <Users size={24} />
+                </div>
+                <div>
+                  <h3 className="font-medium text-indigo-900">Team Compatibility</h3>
+                  <p className="text-gray-600">How you work best with different types</p>
+                </div>
+              </div>
             </div>
 
             <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-100 flex items-center space-x-3">
               <BadgeCheck className="text-indigo-600 flex-shrink-0" />
               <p className="text-indigo-800">
-                <span className="font-medium">10 questions • 3 minutes</span> to discover your unique productivity style
+                <span className="font-medium">20 questions • 5 minutes</span> to discover your unique productivity style
               </p>
             </div>
           </div>

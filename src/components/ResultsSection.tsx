@@ -8,8 +8,14 @@ import {
   LineChart, 
   Zap, 
   Share2, 
-  Sparkles
+  Sparkles,
+  Award,
+  Trophy,
+  AlertTriangle,
+  Users,
+  BarChart
 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 interface ResultsSectionProps {
   results: {
@@ -19,6 +25,19 @@ interface ResultsSectionProps {
     timeBlocking: string[];
     tools: string[];
     habits: string[];
+    strengths: string[];
+    challenges: string[];
+    compatibility: {
+      works_well_with: string[];
+      challenges_with: string[];
+    };
+    score: {
+      cognitive: number;
+      workStyle: number;
+      energy: number;
+      focus: number;
+      toolUsage: number;
+    };
   };
   onRestart: () => void;
 }
@@ -34,6 +53,8 @@ const ResultsSection = ({ results, onRestart }: ResultsSectionProps) => {
           accent: "bg-blue-600",
           light: "bg-blue-50",
           border: "border-blue-100",
+          muted: "text-blue-600/70",
+          progress: "bg-blue-600",
         };
       case "Sprint Strategist":
         return {
@@ -42,6 +63,8 @@ const ResultsSection = ({ results, onRestart }: ResultsSectionProps) => {
           accent: "bg-emerald-600",
           light: "bg-emerald-50",
           border: "border-emerald-100",
+          muted: "text-emerald-600/70",
+          progress: "bg-emerald-600",
         };
       case "Flow Surfer":
         return {
@@ -50,6 +73,8 @@ const ResultsSection = ({ results, onRestart }: ResultsSectionProps) => {
           accent: "bg-purple-600",
           light: "bg-purple-50",
           border: "border-purple-100",
+          muted: "text-purple-600/70",
+          progress: "bg-purple-600",
         };
       case "Structure Seeker":
         return {
@@ -58,6 +83,8 @@ const ResultsSection = ({ results, onRestart }: ResultsSectionProps) => {
           accent: "bg-amber-600",
           light: "bg-amber-50",
           border: "border-amber-100",
+          muted: "text-amber-600/70",
+          progress: "bg-amber-600",
         };
       case "Hybrid Harmonizer":
       default:
@@ -67,6 +94,8 @@ const ResultsSection = ({ results, onRestart }: ResultsSectionProps) => {
           accent: "bg-indigo-600",
           light: "bg-indigo-50",
           border: "border-indigo-100",
+          muted: "text-indigo-600/70",
+          progress: "bg-indigo-600",
         };
     }
   };
@@ -96,16 +125,74 @@ const ResultsSection = ({ results, onRestart }: ResultsSectionProps) => {
         </CardContent>
       </Card>
 
+      {/* Productivity Score Card */}
+      <Card className="bg-white/90 backdrop-blur-sm border-gray-100 shadow-md">
+        <CardContent className="p-6">
+          <h3 className="text-xl font-bold mb-6 flex items-center">
+            <BarChart size={22} className="mr-2 text-indigo-600" />
+            Your Productivity Profile
+          </h3>
+          
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Cognitive Rhythm</span>
+                <span className="text-sm font-semibold">{results.score.cognitive}%</span>
+              </div>
+              <Progress value={results.score.cognitive} className="h-2" indicatorClassName={colors.progress} />
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Work Style</span>
+                <span className="text-sm font-semibold">{results.score.workStyle}%</span>
+              </div>
+              <Progress value={results.score.workStyle} className="h-2" indicatorClassName={colors.progress} />
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Energy Management</span>
+                <span className="text-sm font-semibold">{results.score.energy}%</span>
+              </div>
+              <Progress value={results.score.energy} className="h-2" indicatorClassName={colors.progress} />
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Focus Drivers</span>
+                <span className="text-sm font-semibold">{results.score.focus}%</span>
+              </div>
+              <Progress value={results.score.focus} className="h-2" indicatorClassName={colors.progress} />
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Tool Usage</span>
+                <span className="text-sm font-semibold">{results.score.toolUsage}%</span>
+              </div>
+              <Progress value={results.score.toolUsage} className="h-2" indicatorClassName={colors.progress} />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       <Tabs defaultValue="strategy" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-white/80 backdrop-blur-sm">
+        <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm">
           <TabsTrigger value="strategy" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white">
             <Clock size={18} className="mr-2" /> Time Strategy
           </TabsTrigger>
           <TabsTrigger value="tools" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white">
-            <LineChart size={18} className="mr-2" /> Recommended Tools
+            <LineChart size={18} className="mr-2" /> Tools
           </TabsTrigger>
           <TabsTrigger value="habits" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white">
-            <Brain size={18} className="mr-2" /> Habit Hacks
+            <Brain size={18} className="mr-2" /> Habits
+          </TabsTrigger>
+          <TabsTrigger value="strengths" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white">
+            <Trophy size={18} className="mr-2" /> Strengths
+          </TabsTrigger>
+          <TabsTrigger value="compatibility" className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white">
+            <Users size={18} className="mr-2" /> Compatibility
           </TabsTrigger>
         </TabsList>
         
@@ -159,6 +246,97 @@ const ResultsSection = ({ results, onRestart }: ResultsSectionProps) => {
                   </div>
                 ))}
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="strengths" className="mt-6">
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="text-xl font-semibold mb-4 flex items-center">
+                <Award size={18} className="mr-2 text-indigo-600" /> 
+                Your Productivity Strengths
+              </h3>
+              <div className="space-y-4 mb-6">
+                {results.strengths.map((strength, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className={`p-2 rounded-full ${colors.light} flex-shrink-0`}>
+                      <Award size={18} className={colors.secondary} />
+                    </div>
+                    <p className="text-gray-700">{strength}</p>
+                  </div>
+                ))}
+              </div>
+              
+              <h3 className="text-xl font-semibold mb-4 flex items-center mt-8">
+                <AlertTriangle size={18} className="mr-2 text-amber-600" />
+                Potential Challenges
+              </h3>
+              <div className="space-y-4">
+                {results.challenges.map((challenge, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className="p-2 rounded-full bg-amber-50 flex-shrink-0">
+                      <AlertTriangle size={18} className="text-amber-600" />
+                    </div>
+                    <p className="text-gray-700">{challenge}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="compatibility" className="mt-6">
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="text-xl font-semibold mb-6">Team Compatibility</h3>
+              
+              <div className="mb-8">
+                <h4 className="font-medium text-lg mb-3 flex items-center">
+                  <Users size={16} className="mr-2 text-green-600" />
+                  Works well with:
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {results.compatibility.works_well_with.map((type, index) => (
+                    <div key={index} className="flex items-center p-4 rounded-lg bg-green-50 border border-green-100">
+                      <div className="p-2 rounded-full bg-green-100 mr-3">
+                        <Users size={18} className="text-green-600" />
+                      </div>
+                      <p className="font-medium text-green-800">{type}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {results.compatibility.challenges_with.length > 0 && (
+                <div>
+                  <h4 className="font-medium text-lg mb-3 flex items-center">
+                    <AlertTriangle size={16} className="mr-2 text-amber-600" />
+                    May have challenges with:
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {results.compatibility.challenges_with.map((type, index) => (
+                      <div key={index} className="flex items-center p-4 rounded-lg bg-amber-50 border border-amber-100">
+                        <div className="p-2 rounded-full bg-amber-100 mr-3">
+                          <AlertTriangle size={18} className="text-amber-600" />
+                        </div>
+                        <p className="font-medium text-amber-800">{type}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {results.compatibility.challenges_with.length === 0 && (
+                <div className="flex items-center p-4 rounded-lg bg-blue-50 border border-blue-100">
+                  <div className="p-2 rounded-full bg-blue-100 mr-3">
+                    <Trophy size={18} className="text-blue-600" />
+                  </div>
+                  <p className="font-medium text-blue-800">
+                    As a {results.type}, you work well with all productivity types!
+                  </p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
