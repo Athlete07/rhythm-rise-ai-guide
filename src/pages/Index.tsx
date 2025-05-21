@@ -1,5 +1,4 @@
 
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import IntroSection from "@/components/IntroSection";
 import QuizSection from "@/components/QuizSection";
@@ -50,7 +49,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50">
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         {currentSection === "intro" && <IntroSection onStart={startQuiz} />}
         {currentSection === "quiz" && <QuizSection onComplete={handleQuizComplete} />}
@@ -71,38 +70,43 @@ const calculateResults = (answers: Record<string, number>) => {
   let focusDrivers = 0;
   let toolUsage = 0;
 
-  // Cognitive Rhythm questions (1-4)
+  // Cognitive Rhythm questions (5 questions)
   cognitiveRhythm += answers["q1"] || 0;
   cognitiveRhythm += answers["q2"] || 0;
   cognitiveRhythm += answers["q14"] || 0;
   cognitiveRhythm += answers["q18"] || 0;
+  cognitiveRhythm += answers["q21"] || 0;
 
-  // Work Style questions (5-8)
+  // Work Style questions (5 questions)
   workStyle += answers["q3"] || 0;
   workStyle += answers["q4"] || 0;
   workStyle += answers["q11"] || 0;
   workStyle += answers["q17"] || 0;
+  workStyle += answers["q25"] || 0;
 
-  // Energy Pattern questions (9-12)
+  // Energy Pattern questions (5 questions)
   energyPattern += answers["q5"] || 0;
   energyPattern += answers["q6"] || 0;
   energyPattern += answers["q12"] || 0;
   energyPattern += answers["q20"] || 0;
+  energyPattern += answers["q22"] || 0;
 
-  // Focus Drivers questions (13-16)
+  // Focus Drivers questions (5 questions)
   focusDrivers += answers["q7"] || 0;
   focusDrivers += answers["q8"] || 0;
   focusDrivers += answers["q15"] || 0;
   focusDrivers += answers["q16"] || 0;
+  focusDrivers += answers["q24"] || 0;
 
-  // Tool Usage questions (17-20)
+  // Tool Usage questions (5 questions)
   toolUsage += answers["q9"] || 0;
   toolUsage += answers["q10"] || 0;
   toolUsage += answers["q13"] || 0;
   toolUsage += answers["q19"] || 0;
+  toolUsage += answers["q23"] || 0;
 
   // Normalize scores to 0-100 scale
-  const normalizeScore = (score: number) => Math.round((score / 20) * 100);
+  const normalizeScore = (score: number) => Math.round((score / 25) * 100);
   
   const scores = {
     cognitive: normalizeScore(cognitiveRhythm),
@@ -137,11 +141,11 @@ const calculateResults = (answers: Record<string, number>) => {
 
   // Return results object with type-specific recommendations
   const typeDescriptions = {
-    "Deep Work Beast": "You thrive in long, uninterrupted sessions of focused work. You need significant time to enter your flow state, but once there, you can achieve remarkable depth and quality of work. You prioritize complex, challenging tasks that require deep thinking.",
-    "Sprint Strategist": "You excel in short, high-intensity work bursts. You prefer variety and can quickly shift between different tasks, making you highly adaptable and efficient. Your energy comes in waves, and you instinctively know how to ride them.",
-    "Flow Surfer": "You work best when you can ride your natural creative waves. You need autonomy and the right environment to produce your best work, with strong sensitivity to your surroundings. Your productivity is closely tied to your inspiration and physical state.",
-    "Structure Seeker": "You thrive with clear routines and organized systems. You prefer predictability and benefit from detailed planning and regular checkpoints. For you, productivity is about consistency and methodical progress.",
-    "Hybrid Harmonizer": "You naturally balance structure and flexibility. You adapt your work style intuitively based on the task at hand and your current energy levels. This versatility allows you to excel across different types of projects and environments."
+    "Deep Work Beast": "You thrive in long, uninterrupted sessions of focused work. You need significant time to enter your flow state, but once there, you can achieve remarkable depth and quality of work. You prioritize complex, challenging tasks that require deep thinking and often produce your most innovative ideas during these concentrated periods.",
+    "Sprint Strategist": "You excel in short, high-intensity work bursts. You prefer variety and can quickly shift between different tasks, making you highly adaptable and efficient. Your energy comes in waves, and you instinctively know how to ride them for maximum output while avoiding burnout through strategic breaks and shifts in focus.",
+    "Flow Surfer": "You work best when you can ride your natural creative waves. You need autonomy and the right environment to produce your best work, with strong sensitivity to your surroundings. Your productivity is closely tied to your inspiration and physical state, making you exceptionally productive when conditions align with your natural rhythms.",
+    "Structure Seeker": "You thrive with clear routines and organized systems. You prefer predictability and benefit from detailed planning and regular checkpoints. For you, productivity is about consistency and methodical progress, with satisfaction coming from steadily advancing toward well-defined goals through reliable processes.",
+    "Hybrid Harmonizer": "You naturally balance structure and flexibility. You adapt your work style intuitively based on the task at hand and your current energy levels. This versatility allows you to excel across different types of projects and environments, making you an exceptional collaborator who can bridge different working styles."
   };
 
   // Generate recommendations based on type
@@ -152,7 +156,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Plan for 15-30 minutes of warmup before deep work",
       "End your day with planning for tomorrow",
       "Create a ritual to signal the start of deep work sessions",
-      "Use 90-minute cycles aligned with your ultradian rhythm"
+      "Use 90-minute cycles aligned with your ultradian rhythm",
+      "Block out specific days for complex, creative work"
     ],
     "Sprint Strategist": [
       "Use 25-minute Pomodoro sprints with 5-minute breaks",
@@ -160,7 +165,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Schedule high-energy tasks during your peak hours",
       "Build in transition time between different types of work",
       "Plan your day in 30-minute increments",
-      "Allow for spontaneous productivity bursts"
+      "Allow for spontaneous productivity bursts",
+      "Create 'sprint days' for high-output work"
     ],
     "Flow Surfer": [
       "Create flexible time blocks that can shift based on energy",
@@ -168,7 +174,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Build in buffer time between commitments",
       "Reserve one day per week for your most creative work",
       "Track your energy patterns to identify optimal creative windows",
-      "Allow for 'creativity incubation' time with no specific output goals"
+      "Allow for 'creativity incubation' time with no specific output goals",
+      "Adjust your schedule based on biorhythms and external factors"
     ],
     "Structure Seeker": [
       "Create a consistent daily schedule with fixed blocks",
@@ -176,7 +183,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Schedule regular review and planning sessions",
       "Set specific start and end times for all tasks",
       "Plan your week in advance with detailed time allocation",
-      "Create templates for recurring activities and workflows"
+      "Create templates for recurring activities and workflows",
+      "Organize your day using color-coded calendar blocks"
     ],
     "Hybrid Harmonizer": [
       "Alternate between structured days and flexible days",
@@ -184,16 +192,17 @@ const calculateResults = (answers: Record<string, number>) => {
       "Create morning and afternoon rituals for transitions",
       "Adjust your schedule weekly based on priorities",
       "Balance deep work with collaborative sessions",
-      "Reserve both structured and unstructured thinking time"
+      "Reserve both structured and unstructured thinking time",
+      "Build flexibility into your calendar for spontaneous opportunities"
     ]
   };
 
   const toolRecommendations = {
-    "Deep Work Beast": ["Freedom", "Brain.fm", "RescueTime", "Notion", "Evernote", "Forest app", "Noise-canceling headphones"],
-    "Sprint Strategist": ["Toggl", "Forest", "Taskade", "TickTick", "Sorted", "TimeBloc", "Focus@Will", "Any.do"],
-    "Flow Surfer": ["Muse", "Brain.fm", "Notion", "MindNode", "Trello", "Day.io", "Inspiration cards", "Environment switcher"],
-    "Structure Seeker": ["Sunsama", "Motion", "Google Calendar", "Things 3", "Todoist", "Roam Research", "Airtable", "OmniFocus"],
-    "Hybrid Harmonizer": ["Notion", "Google Calendar", "TickTick", "Todoist", "Centered", "Tiago Forte's PARA method", "Obsidian", "Coda"]
+    "Deep Work Beast": ["Freedom", "Brain.fm", "RescueTime", "Notion", "Evernote", "Forest app", "Noise-canceling headphones", "Focus@Will"],
+    "Sprint Strategist": ["Toggl", "Forest", "Taskade", "TickTick", "Sorted", "TimeBloc", "Focus@Will", "Any.do", "Microsoft To Do"],
+    "Flow Surfer": ["Muse", "Brain.fm", "Notion", "MindNode", "Trello", "Day.io", "Inspiration cards", "Environment switcher", "Apple Notes"],
+    "Structure Seeker": ["Sunsama", "Motion", "Google Calendar", "Things 3", "Todoist", "Roam Research", "Airtable", "OmniFocus", "Amazing Marvin"],
+    "Hybrid Harmonizer": ["Notion", "Google Calendar", "TickTick", "Todoist", "Centered", "Tiago Forte's PARA method", "Obsidian", "Coda", "ClickUp"]
   };
 
   const habitRecommendations = {
@@ -203,7 +212,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Turn off all notifications during deep work",
       "Take a short walk before starting deep work",
       "Keep a 'distraction log' during focus sessions",
-      "Practice meditation to improve concentration"
+      "Practice meditation to improve concentration",
+      "Use the 'shutdown complete' phrase to end your workday"
     ],
     "Sprint Strategist": [
       "Start each day by identifying your top 3 priorities",
@@ -211,7 +221,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Use a timer for focused work sessions",
       "Change your environment for different types of tasks",
       "Practice the '2-minute rule' for quick tasks",
-      "Use visual cues to track daily progress"
+      "Use visual cues to track daily progress",
+      "Implement a 'sprint-and-reflect' rhythm"
     ],
     "Flow Surfer": [
       "Track your energy levels to identify natural patterns",
@@ -219,7 +230,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Use music or ambient sounds that match your current task",
       "Take advantage of high-creativity moments when they occur",
       "Keep an inspiration journal or idea capture system",
-      "Design your environment to minimize unnecessary decisions"
+      "Design your environment to minimize unnecessary decisions",
+      "Practice creative visualization before important work"
     ],
     "Structure Seeker": [
       "Begin and end your workday at consistent times",
@@ -227,7 +239,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Schedule buffer time between meetings",
       "Do a weekly review every Friday afternoon",
       "Create templates for common tasks and communications",
-      "Batch process emails and messages at specific times"
+      "Batch process emails and messages at specific times",
+      "Set up automated reminders for routine responsibilities"
     ],
     "Hybrid Harmonizer": [
       "Check in with yourself throughout the day to assess energy",
@@ -235,7 +248,8 @@ const calculateResults = (answers: Record<string, number>) => {
       "Use different productivity techniques for different projects",
       "Balance planned work with spontaneous creative time",
       "Practice context switching with transitional rituals",
-      "Regularly experiment with new productivity methods"
+      "Regularly experiment with new productivity methods",
+      "Maintain a flexible 'might-do' list alongside your to-dos"
     ]
   };
 
@@ -245,35 +259,40 @@ const calculateResults = (answers: Record<string, number>) => {
       "High output quality on complex knowledge work",
       "Strong analytical thinking and problem-solving",
       "Excellent at completing challenging, long-term projects",
-      "Natural fit for roles requiring depth over breadth"
+      "Natural fit for roles requiring depth over breadth",
+      "Can reach states of flow that produce extraordinary results"
     ],
     "Sprint Strategist": [
       "Outstanding adaptability to changing priorities",
       "Efficient handling of varied workloads",
       "Quick decision-making under pressure",
       "Natural multitasker who can juggle different responsibilities",
-      "High energy output in short, focused bursts"
+      "High energy output in short, focused bursts",
+      "Excellent at managing multiple deadlines simultaneously"
     ],
     "Flow Surfer": [
       "Exceptional creative thinking and innovation",
       "Strong intuitive understanding of complex systems",
       "Ability to make unconventional connections between ideas",
       "Natural at work requiring artistic or lateral thinking",
-      "High-quality output when working in optimal conditions"
+      "High-quality output when working in optimal conditions",
+      "Excellent at reading situations and adapting approaches"
     ],
     "Structure Seeker": [
       "Excellent at creating and maintaining systems",
       "Consistent, reliable output and follow-through",
       "Strong organizational skills and attention to detail",
       "Natural talent for logistics and operations",
-      "Ability to create order from chaos"
+      "Ability to create order from chaos",
+      "Excellent at establishing effective routines"
     ],
     "Hybrid Harmonizer": [
       "Versatility across different work contexts",
       "Natural ability to balance structure with creativity",
       "Strong adaptability to different team dynamics",
       "Excellent at translating between different working styles",
-      "Ability to optimize approach based on the specific challenge"
+      "Ability to optimize approach based on the specific challenge",
+      "Natural mediator between different productivity types"
     ]
   };
 
@@ -283,35 +302,40 @@ const calculateResults = (answers: Record<string, number>) => {
       "Can find it difficult to shift between tasks quickly",
       "Might overlook smaller details when focused on the big picture",
       "Can be resistant to collaboration during flow states",
-      "May need longer recovery after intense focus periods"
+      "May need longer recovery after intense focus periods",
+      "Sometimes struggles with routine administrative tasks"
     ],
     "Sprint Strategist": [
       "Might find it challenging to sustain focus on a single task",
       "Can sometimes start more than they finish",
       "May underestimate time needed for complex tasks",
       "Risk of burnout from constant task-switching",
-      "Can struggle with projects requiring extended deep thinking"
+      "Can struggle with projects requiring extended deep thinking",
+      "Occasionally spreads attention too thin across projects"
     ],
     "Flow Surfer": [
       "May find structured environments limiting",
       "Output can be inconsistent based on inspiration and environment",
       "Might struggle with administrative or routine tasks",
       "Can find it difficult to articulate creative process to others",
-      "May resist planning and scheduling"
+      "May resist planning and scheduling",
+      "Sometimes struggles with consistent follow-through"
     ],
     "Structure Seeker": [
       "Can be thrown off by unexpected changes",
       "Might over-plan at the expense of execution",
       "Can struggle with ambiguous directions or goals",
       "May find it difficult to adapt when plans don't work out",
-      "Risk of getting caught in perfectionism"
+      "Risk of getting caught in perfectionism",
+      "Sometimes misses spontaneous opportunities due to rigidity"
     ],
     "Hybrid Harmonizer": [
       "May sometimes lack the depth of specialists",
       "Can find it hard to commit to a single approach",
       "Might struggle to explain their adaptive methodology to others",
       "Can be pulled in too many directions without boundaries",
-      "May need to actively protect focus time"
+      "May need to actively protect focus time",
+      "Sometimes tries to accommodate too many working styles"
     ]
   };
 

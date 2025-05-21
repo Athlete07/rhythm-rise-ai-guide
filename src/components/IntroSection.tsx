@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BadgeCheck, Brain, Clock, LineChart, Zap, Users, Trophy } from "lucide-react";
+import { BadgeCheck, Brain, Clock, LineChart, Zap, Users, Trophy, Sparkles } from "lucide-react";
 
 interface IntroSectionProps {
   onStart: () => void;
@@ -11,7 +11,11 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
   return (
     <div className="space-y-8 animate-fadeIn">
       <header className="text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-indigo-900 tracking-tight">
+        <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-indigo-100 backdrop-blur-sm border border-indigo-200 shadow-sm mb-2">
+          <Sparkles size={16} className="text-indigo-600 mr-2" />
+          <span className="text-indigo-800 font-medium">Science-Based Assessment</span>
+        </div>
+        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-indigo-700 via-purple-600 to-indigo-800 bg-clip-text text-transparent tracking-tight">
           Discover Your Productivity Style
         </h1>
         <p className="text-xl text-indigo-700 max-w-2xl mx-auto">
@@ -19,16 +23,16 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
         </p>
       </header>
 
-      <Card className="bg-white/80 backdrop-blur-sm border-indigo-100 shadow-lg">
+      <Card className="bg-white/90 backdrop-blur-sm border-indigo-100 shadow-lg hover:shadow-xl transition-all">
         <CardContent className="p-6 md:p-8">
           <div className="space-y-6">
-            <p className="text-gray-700 text-lg">
+            <p className="text-gray-700 text-lg font-medium">
               This science-backed assessment will help you understand:
             </p>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="flex items-start space-x-4">
-                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+              <div className="flex items-start space-x-4 group">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700 group-hover:bg-indigo-200 transition-colors">
                   <Brain size={24} />
                 </div>
                 <div>
@@ -37,8 +41,8 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+              <div className="flex items-start space-x-4 group">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700 group-hover:bg-indigo-200 transition-colors">
                   <Clock size={24} />
                 </div>
                 <div>
@@ -47,8 +51,8 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+              <div className="flex items-start space-x-4 group">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700 group-hover:bg-indigo-200 transition-colors">
                   <LineChart size={24} />
                 </div>
                 <div>
@@ -57,8 +61,8 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+              <div className="flex items-start space-x-4 group">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700 group-hover:bg-indigo-200 transition-colors">
                   <Zap size={24} />
                 </div>
                 <div>
@@ -67,8 +71,8 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
                 </div>
               </div>
               
-              <div className="flex items-start space-x-4">
-                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+              <div className="flex items-start space-x-4 group">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700 group-hover:bg-indigo-200 transition-colors">
                   <Trophy size={24} />
                 </div>
                 <div>
@@ -77,8 +81,8 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
                 </div>
               </div>
               
-              <div className="flex items-start space-x-4">
-                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700">
+              <div className="flex items-start space-x-4 group">
+                <div className="bg-indigo-100 p-2 rounded-full text-indigo-700 group-hover:bg-indigo-200 transition-colors">
                   <Users size={24} />
                 </div>
                 <div>
@@ -88,10 +92,10 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
               </div>
             </div>
 
-            <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-100 flex items-center space-x-3">
-              <BadgeCheck className="text-indigo-600 flex-shrink-0" />
+            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-5 rounded-lg border border-indigo-100 flex items-center space-x-3">
+              <BadgeCheck className="text-indigo-600 flex-shrink-0" size={20} />
               <p className="text-indigo-800">
-                <span className="font-medium">20 questions • 5 minutes</span> to discover your unique productivity style
+                <span className="font-medium">25 questions • 5 minutes</span> to discover your unique productivity style
               </p>
             </div>
           </div>
@@ -102,10 +106,14 @@ const IntroSection = ({ onStart }: IntroSectionProps) => {
         <Button 
           size="lg" 
           onClick={onStart}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-6 text-lg rounded-full transition-all duration-200 shadow-md hover:shadow-lg"
+          className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-6 text-lg rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
         >
           Start Your Assessment
         </Button>
+      </div>
+
+      <div className="text-center text-gray-500 text-sm">
+        Over 10,000 professionals have optimized their work patterns with our assessment
       </div>
     </div>
   );

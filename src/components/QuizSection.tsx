@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface QuizSectionProps {
   onComplete: (answers: Record<string, number>) => void;
@@ -232,6 +233,61 @@ const questions = [
       { value: 1, label: "I struggle with balance and often overwork" },
     ],
   },
+  {
+    id: "q21",
+    text: "How do you prefer to learn new skills or information?",
+    options: [
+      { value: 5, label: "Structured courses with clear progression" },
+      { value: 4, label: "Self-directed learning with regular practice" },
+      { value: 3, label: "By doing and experimenting hands-on" },
+      { value: 2, label: "Through discussions and collaborative learning" },
+      { value: 1, label: "Immersive deep-dives when needed" },
+    ],
+  },
+  {
+    id: "q22",
+    text: "When do you typically schedule meetings or collaborative work?",
+    options: [
+      { value: 5, label: "Early in the day to get them out of the way" },
+      { value: 4, label: "Mid-morning when energy is high" },
+      { value: 3, label: "Around lunchtime as a break from solo work" },
+      { value: 2, label: "Afternoons when I'm less focused on deep work" },
+      { value: 1, label: "I try to batch them on specific days" },
+    ],
+  },
+  {
+    id: "q23",
+    text: "How do you respond to high-pressure situations?",
+    options: [
+      { value: 5, label: "I thrive and become hyper-focused" },
+      { value: 4, label: "I methodically break down problems and stay calm" },
+      { value: 3, label: "I seek collaboration to solve complex challenges" },
+      { value: 2, label: "I need quiet time to process before responding" },
+      { value: 1, label: "I often feel overwhelmed initially but adapt" },
+    ],
+  },
+  {
+    id: "q24",
+    text: "What environment changes have the biggest impact on your productivity?",
+    options: [
+      { value: 5, label: "Noise level and audio environment" },
+      { value: 4, label: "Visual organization and lack of clutter" },
+      { value: 3, label: "Lighting conditions and natural light" },
+      { value: 2, label: "Temperature and physical comfort" },
+      { value: 1, label: "Presence or absence of other people" },
+    ],
+  },
+  {
+    id: "q25",
+    text: "Which statement best describes your ideal workflow?",
+    options: [
+      { value: 5, label: "Predictable routine with scheduled focus periods" },
+      { value: 4, label: "Dynamic and flexible, adapting to daily energy" },
+      { value: 3, label: "Project-based intensity followed by recovery" },
+      { value: 2, label: "Collaborative with regular team interaction" },
+      { value: 1, label: "Autonomous with freedom to structure my own time" },
+    ],
+  },
 ];
 
 const QuizSection = ({ onComplete }: QuizSectionProps) => {
@@ -279,15 +335,15 @@ const QuizSection = ({ onComplete }: QuizSectionProps) => {
   return (
     <div className="space-y-8 animate-fadeIn">
       <header className="text-center">
-        <h1 className="text-3xl font-bold text-indigo-900">Productivity Style Quiz</h1>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-700 to-purple-700 bg-clip-text text-transparent">Productivity Style Quiz</h1>
         <p className="text-indigo-700 mt-2">Question {currentQuestion + 1} of {questions.length}</p>
       </header>
 
       <div className="mb-6">
-        <Progress value={progress} className="h-2 bg-indigo-100" indicatorClassName="bg-indigo-600" />
+        <Progress value={progress} className="h-2.5 bg-indigo-100" indicatorClassName="bg-gradient-to-r from-indigo-600 to-purple-600" />
       </div>
 
-      <Card className="bg-white/80 backdrop-blur-sm border-indigo-100 shadow-lg">
+      <Card className="bg-white/90 backdrop-blur-sm border-indigo-100 shadow-lg hover:shadow-xl transition-all">
         <CardContent className="p-6 md:p-8">
           <h2 className="text-xl font-medium text-indigo-900 mb-6">{question.text}</h2>
 
@@ -301,7 +357,7 @@ const QuizSection = ({ onComplete }: QuizSectionProps) => {
                 key={option.value}
                 className={`flex items-center border rounded-lg p-4 cursor-pointer transition-all ${
                   selectedOption === option.value.toString()
-                    ? "bg-indigo-50 border-indigo-300"
+                    ? "bg-gradient-to-r from-indigo-50 to-purple-50 border-indigo-300 shadow-sm"
                     : "border-gray-200 hover:border-indigo-200 hover:bg-indigo-50/30"
                 }`}
                 onClick={() => handleOptionSelect(option.value.toString())}
@@ -328,16 +384,20 @@ const QuizSection = ({ onComplete }: QuizSectionProps) => {
           variant="outline"
           onClick={handleBack}
           disabled={currentQuestion === 0}
-          className="text-indigo-700 border-indigo-300"
+          className="text-indigo-700 border-indigo-300 hover:bg-indigo-50"
         >
-          Previous
+          <ChevronLeft size={18} className="mr-1" /> Previous
         </Button>
         <Button
           onClick={handleNext}
           disabled={selectedOption === null}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white px-8"
+          className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 transform transition-all hover:-translate-y-0.5"
         >
-          {currentQuestion < questions.length - 1 ? "Next Question" : "See Results"}
+          {currentQuestion < questions.length - 1 ? (
+            <>Next Question <ChevronRight size={18} className="ml-1" /></>
+          ) : (
+            "See Results"
+          )}
         </Button>
       </div>
     </div>
